@@ -34,7 +34,7 @@ class Users{
     }
     createUser(user){}
     getUserById(id){}
-    getllUsers(){}
+    getllUsers(){ return [...this.users];}
     updateUser(id, newInfo){}
     deleteUser(id){}
 }
