@@ -1,15 +1,53 @@
 const express = require('express');
-const path = require('path');
 
 const app = express();
 
-app.get('/', (req, res) => {
-    console.log("requiest is ", req);
-    res.status(200).send();
-});
+// db
+const usersDB = [
+    {
+        id: 1,
+        name: "John",
+        surname: "Fox",
+        isMale: true,
+        age: 20
+    },
+    {
+        id: 2,
+        name: "Tom",
+        surname: "Smith",
+        isMale: true,
+        age: 22
+    },
+    {
+        id: 3,
+        name: "Ann",
+        surname: "Gran",
+        isMale: false,
+        age: 20
+    }
+];
+
+class Users{
+    constructor(users){
+        this.users = [...users];
+        this.count = users.length; //users[users.length -1].id + 1
+    }
+    createUser(user){}
+    getUserById(id){}
+    getllUsers(){}
+    updateUser(id, newInfo){}
+    deleteUser(id){}
+}
+
+const usersInstance = new Users(usersDB);
 
 // CRUD for user / controller for user
-app.get("/users", (req, res) => {});
+// get all users
+app.get("/users", (req, res) => {
+    const data = usersInstance.getllUsers();
+    res.status(200).send(data);
+});
+
 app.get("/users/1", (req, res) => {});
 app.post("/users", (req, res) => {});
 app.patch("/users/1", (req, res) => {});
