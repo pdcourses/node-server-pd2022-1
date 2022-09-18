@@ -35,7 +35,10 @@ class Users{
     createUser(user){
         this.count++;
         this.users.push({...user, id: this.count});
-        return this.users[this.count - 1];
+        const newUser = this.users[this.count - 1];
+        console.log('user=',user);
+        console.log('newUser=',newUser);
+        return newUser;
     }
     getUserById(id){
         const foundIndex = this.users.findIndex((u) => u.id === Number(id));
@@ -75,9 +78,10 @@ app.get("/users/:id", (req, res) => {
 });
 // add new user 
 app.post("/users", (req, res) => {
-    const {body} = req;
+    const { body } = req;
+    console.log('body=',body);
     const newUser = usersInstance.createUser(body);
-    res.status(201).send(foundUser);
+    res.status(201).send(newUser);
 });
 //update info for user by id
 app.patch("/users/:id", (req, res) => {
