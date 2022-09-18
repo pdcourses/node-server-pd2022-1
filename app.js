@@ -1,6 +1,7 @@
 const express = require('express');
 
 const app = express();
+app.use(express.json());
 
 // db
 const usersDB = [
@@ -36,29 +37,26 @@ class Users{
         this.count++;
         this.users.push({...user, id: this.count});
         const newUser = this.users[this.count - 1];
-        console.log('user=',user);
-        console.log('newUser=',newUser);
         return newUser;
     }
     getUserById(id){
         const foundIndex = this.users.findIndex((u) => u.id === Number(id));
-        return this.users[foundIndex];
+        return foundIndex === -1 ? null : this.users[foundIndex];
     }
     getllUsers(){ 
         return [...this.users];
     }
     updateUser(id, newInfo){
         const foundIndex = this.users.findIndex((u) => u.id === Number(id));
-        this.users[foundIndex] = {
+        return foundIndex === -1 ? null : this.users[foundIndex] = {
             ...this.users[foundIndex],
             ...newInfo,
         };
-        return this.users[foundIndex];
     }
     deleteUser(id){
         const foundIndex = this.users.findIndex((u) => u.id === Number(id));
-        this.users.splice(foundIndex, 1);
         this.count--;
+        return foundIndex === -1 ? null : this.users.splice(foundIndex, 1);
     }
 }
 
@@ -79,7 +77,6 @@ app.get("/users/:id", (req, res) => {
 // add new user 
 app.post("/users", (req, res) => {
     const { body } = req;
-    console.log('body=',body);
     const newUser = usersInstance.createUser(body);
     res.status(201).send(newUser);
 });
