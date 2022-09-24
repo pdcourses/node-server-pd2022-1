@@ -19,3 +19,24 @@ module.exports.validateUserCreate = (req, res, next) => {
       res.status(400).send(error);
     });
 };
+
+// update
+
+const userUpdateSchema = yup.object({
+    surname: yup.string().trim().min(2).max(64),
+    age: yup.number().positive().integer()
+});
+
+module.exports.validateUserUpdate = (req, res, next) => {
+  const { body } = req;
+  userUpdateSchema
+    .validate(body)
+    .then((validatedUser) => {
+      req.body = validatedUser;
+      next();
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
+};
+

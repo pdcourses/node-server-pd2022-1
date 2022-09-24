@@ -9,9 +9,10 @@ app.use(express.json());
 app.get("/users", userController.getAllUsers);
 app.get("/users/:id", userController.getUser);
 
+
 app.post("/users", validate.validateUserCreate, userController.createNewUser);
 
-app.patch("/users/:id", userController.updateUser);
+app.patch("/users/:id", validate.validateUserUpdate, userController.updateUser);
 
 app.delete("/users/:id", userController.deleteUser);
 
