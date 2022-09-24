@@ -1,9 +1,14 @@
 const express = require('express');
 const {userController} = require('./controllers');
-const {validate} = require('./middleware');
+const {validate, errorHandlers} = require('./middleware');
 
 const app = express();
+
+// json data
 app.use(express.json());
+
+//errors
+app.use(errorHandlers.validationEH, errorHandlers.internalServerEH);
 
 // users
 app.get("/users", userController.getAllUsers);
