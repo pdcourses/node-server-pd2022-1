@@ -39,7 +39,12 @@ models
 
 contontrollers
 
-=> app
+=> routes
+
+app router
+<=>
+
+app
 
 
 
