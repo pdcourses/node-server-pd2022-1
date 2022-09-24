@@ -7,7 +7,7 @@ module.exports.internalServerEH = (err, req, res, next) => {
 
 // 422 UNPROCESSABLE ENTITY / for validate
 module.exports.validationEH = (err, req, res, next) => {
-    if(err instanceof ValidationError)
+    if(err instanceof ValidationError){
         res.status(422).send(err.errors);
     }
     next(err);
