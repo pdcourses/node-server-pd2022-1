@@ -1,27 +1,4 @@
-const usersDB = [
-    {
-        id: 1,
-        name: "John",
-        surname: "Fox",
-        isMale: true,
-        age: 20
-    },
-    {
-        id: 2,
-        name: "Tom",
-        surname: "Smith",
-        isMale: true,
-        age: 22
-    },
-    {
-        id: 3,
-        name: "Ann",
-        surname: "Gran",
-        isMale: false,
-        age: 20
-    }
-];
-
+const usersDB = require('./data/users.json');
 class Users{
     constructor(users){
         this.users = [...users];

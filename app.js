@@ -7,6 +7,9 @@ const app = express();
 // json data
 app.use(express.json());
 
+//static
+app.use(express.static('public'));
+
 //errors
 app.use(errorHandlers.validationEH, errorHandlers.internalServerEH);
 
